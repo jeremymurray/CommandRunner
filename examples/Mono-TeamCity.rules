@@ -1,0 +1,26 @@
+[
+  {
+    "passOutput": false,
+    "stopProcessing": true,
+    "setError": false,
+    "processStdErr": true,
+    "processStdOut": true,
+    "stdoutFormat": "##teamcity[message text='{1:replace(teamcitylogattribute)}' status='WARNING']",
+    "reportFormat": "{1}",
+    "stderrFormat": null,
+    "shortPattern": "warning",
+    "pattern": "(.*[\\s]+[^\\s]+\\([0-9]+,[0-9]+\\): warning [^\\s]+:[\\s]+.*)$"
+  },
+  {
+    "passOutput": false,
+    "stopProcessing": true,
+    "setError": true,
+    "processStdErr": true,
+    "processStdOut": true,
+    "stdoutFormat": "##teamcity[message text='{1:replace(teamcitylogattribute)}' status='ERROR']",
+    "stderrFormat": null,
+    "reportFormat": "{1}",
+    "shortPattern": "error",
+    "pattern": "(.*[\\s]+[^\\s]+\\([0-9]+,[0-9]+\\): error [^\\s]+:[\\s]+.*)$"
+  },
+]
