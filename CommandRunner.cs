@@ -641,14 +641,16 @@ class CommandRunner
             int maxWidth = (regexMatchCount + regexMissCount + shortRegexMatchCount + shortRegexMissCount).ToString().Length;
             string statsOutputPattern = "{0,-21} {1," + maxWidth + "} Duration {2} (Avg: {3})";
 
-            sr.WriteLine(string.Format(statsOutputPattern, "Pattern Hits:", regexMatchCount, regexMatchCumulativeDuration, regexMatchCount == 0?new TimeSpan(0):TimeSpan.FromTicks(regexMatchCumulativeDuration.Ticks/regexMatchCount)));
-            sr.WriteLine(string.Format(statsOutputPattern, "Pattern Misses:", regexMissCount, regexMissCumulativeDuration, regexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks(regexMissCumulativeDuration.Ticks/regexMissCount)));
-            sr.WriteLine(string.Format(statsOutputPattern, "Pattern Total:", regexMatchCount + regexMissCount, regexMatchCumulativeDuration + regexMissCumulativeDuration, regexMatchCount + regexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks((regexMatchCumulativeDuration + regexMissCumulativeDuration).Ticks/(regexMatchCount + regexMissCount))));
+			if (rules.Count > 0)
+			{
+				sr.WriteLine(string.Format(statsOutputPattern, "Pattern Hits:", regexMatchCount, regexMatchCumulativeDuration, regexMatchCount == 0?new TimeSpan(0):TimeSpan.FromTicks(regexMatchCumulativeDuration.Ticks/regexMatchCount)));
+				sr.WriteLine(string.Format(statsOutputPattern, "Pattern Misses:", regexMissCount, regexMissCumulativeDuration, regexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks(regexMissCumulativeDuration.Ticks/regexMissCount)));
+				sr.WriteLine(string.Format(statsOutputPattern, "Pattern Total:", regexMatchCount + regexMissCount, regexMatchCumulativeDuration + regexMissCumulativeDuration, regexMatchCount + regexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks((regexMatchCumulativeDuration + regexMissCumulativeDuration).Ticks/(regexMatchCount + regexMissCount))));
 
-            sr.WriteLine(string.Format(statsOutputPattern, "Short Pattern Hits:", shortRegexMatchCount, shortRegexMatchCumulativeDuration, shortRegexMatchCount == 0?new TimeSpan(0):TimeSpan.FromTicks(shortRegexMatchCumulativeDuration.Ticks/shortRegexMatchCount)));
-            sr.WriteLine(string.Format(statsOutputPattern, "Short Pattern Misses:", shortRegexMissCount, shortRegexMissCumulativeDuration, shortRegexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks(shortRegexMissCumulativeDuration.Ticks/shortRegexMissCount)));
-            sr.WriteLine(string.Format(statsOutputPattern, "Short Pattern Total:", shortRegexMatchCount + shortRegexMissCount, shortRegexMatchCumulativeDuration + shortRegexMissCumulativeDuration, shortRegexMatchCount + shortRegexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks((shortRegexMatchCumulativeDuration + shortRegexMissCumulativeDuration).Ticks/(shortRegexMatchCount + shortRegexMissCount))));
-
+				sr.WriteLine(string.Format(statsOutputPattern, "Short Pattern Hits:", shortRegexMatchCount, shortRegexMatchCumulativeDuration, shortRegexMatchCount == 0?new TimeSpan(0):TimeSpan.FromTicks(shortRegexMatchCumulativeDuration.Ticks/shortRegexMatchCount)));
+				sr.WriteLine(string.Format(statsOutputPattern, "Short Pattern Misses:", shortRegexMissCount, shortRegexMissCumulativeDuration, shortRegexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks(shortRegexMissCumulativeDuration.Ticks/shortRegexMissCount)));
+				sr.WriteLine(string.Format(statsOutputPattern, "Short Pattern Total:", shortRegexMatchCount + shortRegexMissCount, shortRegexMatchCumulativeDuration + shortRegexMissCumulativeDuration, shortRegexMatchCount + shortRegexMissCount == 0?new TimeSpan(0):TimeSpan.FromTicks((shortRegexMatchCumulativeDuration + shortRegexMissCumulativeDuration).Ticks/(shortRegexMatchCount + shortRegexMissCount))));
+			}
             
             return sr.ToString();	
         }
