@@ -16,6 +16,7 @@ Libraries and License
 ---------------------
 
 CommandRunner uses the following libraries:
+
 * JSON.NET - MIT License - http://json.codeplex.com
 * NDesk.Options - MIT License - http://www.ndesk.org/Options
 
@@ -28,11 +29,13 @@ Run 'cr --help' for usage and options.
 
 Generally, you will pass one or more commands and define rules to test against the output of those commands.  
 
-A rule
+A rule:
+
 * defines a pattern regex and can parse STDOUT, STDERR, or both
 * can define a short pattern regex, a faster pattern that must first match before attempting complex, slow pattern regexes
 
 On a match, a rule can optionally:
+
 * pass the original line through
 * print formatted regex matches of the line on STDOUT, STDERR, or both
 * print a separate report string at the end of all command output
@@ -41,6 +44,7 @@ On a match, a rule can optionally:
 * set an error flag
 
 CommandRunner can also do some high-level operations on the commands, such as:
+
 * force the return of all sub-commands, allowing success (0) returns on commands that error
 * sum the returns of all sub-commnds
 * print the time 
@@ -50,7 +54,6 @@ Passing multiple commands will execute them in order.  Passing multiple rules wi
 Flags can be used to create a single rule at the commandline.  This rule will execute before all other rule files.
 
 Rule and Search/Replace files are written in JSON.  There are flags that will print examples for basing new files.
-
 
 Examples
 --------
@@ -73,7 +76,9 @@ Time elapsed: 00:00:00.2830000
 ```
 
 * Parse Build Ouput and Report Errors
+
 Given a GCC output with errors and warnings (like the following, reduced to just the errors/warnings):
+
 ```
 d:/projects/ExampleProject/inc/thing.hpp:75: warning: `class Thing' has virtual functions but non-virtual destructor
 d:/projects/ExampleProject/src/thing.cpp:279: error: `updateThing' undeclared (first use this function)
@@ -82,6 +87,7 @@ d:/projects/ExampleProject/src/thing.cpp::495:2: warning: no newline at end of f
 ```
 
 You could use a rule file with the following contents:
+
 ```
 [
   {
@@ -139,7 +145,9 @@ Warning - File: d:/projects/ExampleProject/src/thing.cpp: Line: 495 Character: 2
 ```
 
 * Profile Rules for Performance
+
 Passing an additional -s flag will show statistics for the rule matching.  Adding the flag to the above example produces:
+
 ```
 Number of Rules: 3
 Title: Compile Warning with Line and Character
@@ -184,6 +192,7 @@ Statistics help to find if rules are matching or not and how long the program is
 
 Contact
 -------
+
 Please let me know if you have any questions or suggestions: CommandRunner@jeremymurray.org
 
 
