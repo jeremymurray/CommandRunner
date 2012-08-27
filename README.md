@@ -58,7 +58,7 @@ Rule and Search/Replace files are written in JSON.  There are flags that will pr
 Examples
 --------
 
-* Time Run
+### Time Run
 
 Adding a -t flag will print the execution time of all commands run.
 
@@ -75,7 +75,7 @@ C:\Projects\CommandRunner>cr -t dir
 Time elapsed: 00:00:00.2830000
 ```
 
-* Parse Build Ouput and Report Errors
+### Parse Build Ouput and Report Errors
 
 Given a GCC output with errors and warnings (like the following, reduced to just the errors/warnings):
 
@@ -144,7 +144,7 @@ Error - File: /projects/ExampleProject/src/thing.cpp Line: 279 - (Each undeclare
 Warning - File: d:/projects/ExampleProject/src/thing.cpp: Line: 495 Character: 2 - no newline at end of file
 ```
 
-* Profile Rules for Performance
+### Profile Rules for Performance
 
 Passing an additional -s flag will show statistics for the rule matching.  Adding the flag to the above example produces:
 
