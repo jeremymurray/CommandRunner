@@ -811,7 +811,7 @@ class CommandRunner
             
             string statsOutputPattern = "  {0,-7} {1," + maxWidth + "} Duration {2} (Avg: {3})";
 
-            if (!string.IsNullOrEmpty(title)) sr.WriteLine("Title: " + pattern);
+            if (!string.IsNullOrEmpty(title)) sr.WriteLine("Title: " + title);
             if (!string.IsNullOrEmpty(description)) sr.WriteLine("Description: " + description);
             if (!string.IsNullOrEmpty(example)) sr.WriteLine("Example: " + example);
             sr.WriteLine("Pattern: " + pattern);
