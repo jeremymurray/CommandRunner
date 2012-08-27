@@ -212,6 +212,17 @@ class CommandRunner
             Environment.Exit(0);
         }
 
+        if (passedRuleExists)
+        {
+            if (!passedRule.IsValid())
+            {
+                Console.WriteLine ("ERROR - Passed rule is invalid:");
+                Console.Write (JsonConvert.SerializeObject(passedRule, Formatting.Indented));
+                Environment.Exit(1);
+            }
+            outputHandler.rules.Add(passedRule);
+        }
+		
         if (commandFiles.Count != 0)
         {
             foreach (var commandFile in commandFiles)
@@ -231,18 +242,7 @@ class CommandRunner
                 }
             }
         }
-        
-        if (passedRuleExists)
-        {
-            if (!passedRule.IsValid())
-            {
-                Console.WriteLine ("ERROR - Passed rule is invalid:");
-                Console.Write (JsonConvert.SerializeObject(passedRule, Formatting.Indented));
-                Environment.Exit(1);
-            }
-            outputHandler.rules.Add(passedRule);
-        }
-        
+                
         if (otherArgs.Length > 0)
         {
             commands.Add(String.Join(" ", otherArgs));
