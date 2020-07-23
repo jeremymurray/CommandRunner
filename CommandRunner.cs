@@ -129,6 +129,7 @@ class CommandRunner
             { "stoponerror", "When running multiple commands, stop execution after first error", arg => stopOnFirstError = arg != null},
             { "sumreturns", "When running multiple commands, set final return value to sum of all subcommand return values", arg => sumReturnValues = arg != null},
             { "t|time", "Shows processing time", arg => timeRun = arg != null},
+            { "timelines", "Shows processing time per output line", arg => outputHandler.timeLines = arg != null},
         };
 
         string[] otherArgs = null;
@@ -453,6 +454,7 @@ class CommandRunner
     
     public class OutputHandler
     {
+        private DateTime start = DateTime.Now;
         public StringFunctionFormatter stringFunctionFormatter = new StringFunctionFormatter();
         
         public List<OutputRule> rules = new List<OutputRule>();
@@ -460,6 +462,7 @@ class CommandRunner
         public bool outputMatchPass = true;
         public bool outputMatchStdout = true;
         public bool outputMatchStderr = true;
+        public bool timeLines = false;
         
         public List<string> report = new List<string>();
 
@@ -592,6 +595,19 @@ class CommandRunner
         
         private void PassOutput (string line, InputStream inputStream)
         {
+            if (timeLines)
+            {
+              TimeSpan timeSpan = DateTime.Now - start;
+              string timeSpanString = "Time elapsed: " + timeSpan;
+              if (inputStream == InputStream.STDOUT)
+              {
+                  Console.WriteLine(timeSpanString);
+              }
+              else
+              {
+                  Console.Error.WriteLine(timeSpanString);
+              }
+            }
             if (inputStream == InputStream.STDOUT)
             {
                 Console.WriteLine(line);
